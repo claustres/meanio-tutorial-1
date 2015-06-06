@@ -8,4 +8,20 @@ Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introd
 
 ## Installation
 
-Afin de me simplifier la vie j'ai l'habitude d'utiliser des solutions pré-packagées pour l'infrastructure de développement ou de production. Pour MEAN.IO j'utilise celles de [Bitnami](https://bitnami.com/stack/mean) disponibles en environnement Windows, Linux Ubuntu ou de type Cloud comme Amazon. Elles ont l'avantage d'intégrer également l'outil RockMongo.
+Afin de me simplifier la vie j'ai l'habitude d'utiliser des solutions pré-packagées pour l'infrastructure de développement ou de production. Pour MEAN.IO j'utilise celles de [Bitnami](https://bitnami.com/stack/mean) disponibles en environnement Windows, Linux Ubuntu ou de type Cloud comme Amazon. Elles ont l'avantage d'intégrer également un outil d'administration pour MongoDB nommé RockMongo.
+
+L'outil utilisé par MEAN.IO pour exécuter les différentes tâches nécessaires au développement, aux tests et à la mise en production est gulp. Il faut également installer bower pour la gestion des dépendances côté front-end, npm de node.js étant utilisé côté back-end. Vous procéderez donc comme suit : 
+```
+$ npm install -g gulp
+$ npm install -g bower 
+```
+
+## Conclusion
+
+Nous avons passé en revue dans cet article les grands principes de MEAN.IO. Pour ma part, même s'il est évident que le framework n'est pas encore mature (la version 0.5 courante au moment de rédaction de l'article est annoncée comme la release candidate à la version 1.0) il me semble déjà procurer une bonne base pour structurer des applications web full JavaScript :
+
+ - une architecture modulaire orientée composant (un module est un plugin qui peut être rajouté à l'application sans nécessité de modifier l'existant)
+ - une structuration de fichiers à l'intérieur de chaque module qui permet de simplifier le développement en automatisant la déclaration des modèles, des routes et des dépendances
+ - une usine logicielle (analyse de code, minification, documentation, etc.)
+
+
