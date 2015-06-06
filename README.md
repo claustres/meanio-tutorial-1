@@ -21,7 +21,8 @@ $ npm install -g bower
 Nous avons passé en revue dans cet article les grands principes de MEAN.IO. Pour ma part, même s'il est évident que le framework n'est pas encore mature (la version 0.5 courante au moment de rédaction de l'article est annoncée comme la release candidate à la version 1.0) il me semble déjà procurer une bonne base pour structurer des applications web full JavaScript :
 
  - une architecture modulaire orientée composant (un module est un plugin qui peut être rajouté à l'application sans nécessité de modifier l'existant)
- - une structuration de fichiers à l'intérieur de chaque module qui permet de simplifier le développement en automatisant la déclaration des modèles, des routes et des dépendances
+ - une organisation de fichiers à l'intérieur de chaque module qui permet de simplifier le développement en automatisant la déclaration des modèles, des routes et des dépendances
  - une usine logicielle (analyse de code, minification, documentation, etc.)
+ - tout en étant Open Source il reste portée par une entreprise qui l'utilise pour ses projets internes
 
-
+A noter que le lead développeur historique de MEAN.IO a quitté l'entreprise et créé un fork nommé MEAN.JS. A ce stade il reste moins populaire malgré un départ assez rapide, le plus inquiétant étant le fait que les commits semblent se faire rare depuis quelques temps. De plus, MEAN.JS sépare les parties back-end et front-end contrairement à l'approche par composant de MEAN.IO, ce qui me parait moins élégant.
