@@ -56,15 +56,27 @@ Pour lancer le serveur exécutez ensuite simplement la commande `gulp` puis conn
 > mean status
 > ```
 
+## Anatomie de l'application
+
 ## Anatomie d'un module
+
+## Coeur fonctionnel
+
+### Aggrégation
+
+### Authentification
+
+### Barre de menu
 
 ## Conclusion
 
-Nous avons passé en revue dans cet article les grands principes de MEAN.IO. Pour ma part, même s'il est évident que le framework n'est pas encore mature (la version 0.5 courante au moment de rédaction de l'article est annoncée comme la release candidate à la version 1.0) il me semble déjà procurer une bonne base pour structurer des applications web full JavaScript :
+Nous avons passé en revue dans cet article les grands principes de MEAN.IO. Pour ma part, même s'il est évident que le framework n'est pas encore mature (la version 0.5 courante au moment de rédaction de l'article est annoncée comme la release candidate à la version 1.0), il me semble déjà procurer une bonne base pour structurer des applications web full JavaScript :
 
  - une architecture modulaire orientée composant (un module est un plugin qui peut être rajouté à l'application sans nécessité de modifier l'existant)
  - une organisation de fichiers à l'intérieur de chaque module qui permet de simplifier le développement en automatisant la déclaration des modèles, des routes et des dépendances
  - une usine logicielle (analyse de code, minification, documentation, etc.)
- - tout en étant Open Source il reste portée par une entreprise qui l'utilise pour ses projets internes
+ - des fonctionnalités de base requises par la plupart des applications (authentification, gestion des rôles, gestion des menus, options de configuration, etc.)
+ - un réseau naissant de modules d'extension portés par la communauté
+ - tout en étant Open Source il reste porté par une entreprise qui l'utilise pour ses projets internes, ce qui peut éviter un essouflement rapide de la communauté
 
-A noter que le lead développeur historique de MEAN.IO a quitté l'entreprise et créé un fork nommé MEAN.JS. A ce stade il reste moins populaire malgré un départ assez rapide, le plus inquiétant étant le fait que les commits semblent se faire rare depuis quelques temps. De plus, MEAN.JS sépare les parties back-end et front-end contrairement à l'approche par composant de MEAN.IO, ce qui me parait moins élégant.
+A noter que le lead développeur historique de MEAN.IO a quitté l'entreprise et créé un fork nommé [MEAN.JS](http://meanjs.org/). A ce stade il reste moins populaire malgré un départ assez fulgurant, le plus inquiétant étant le fait que les commits semblent se faire rare depuis quelques mois. De plus, MEAN.JS sépare les parties back-end et front-end contrairement à l'approche par composant de MEAN.IO, ce qui me parait moins élégant d'un point de vue structure.
