@@ -47,7 +47,11 @@ module.exports = {
   debug: true,
   ...
 ```
-Pour lancer le serveur exécutez ensuite simplement la commande `gulp` puis connectez-vous avec votre browser à l'adresse [http://localhost:3000/](http://localhost:3000/). Vous pouvez créer votre premier utilisateur pour vous connecter à l'application via l'entrée *Join* dans la barre de menu. A ce stade vous ne devriez avoir que deux entrées accessibles dans la barre de menu en plus du menu associé à votre profil (voir Figure 1).
+Pour lancer le serveur exécutez ensuite simplement la commande `gulp` puis connectez-vous avec votre browser à l'adresse [http://localhost:3000/](http://localhost:3000/). Vous pouvez créer votre premier utilisateur pour vous connecter à l'application via l'entrée *Join* dans la barre de menu. A ce stade vous ne devriez avoir que deux entrées accessibles dans la barre de menu en plus du menu associé à votre profil (voir Figure 1). Pour rendre l'utilisateur créé administrateur de l'application utilisez la commande suivante :
+```
+mean user email@google.com --addRole admin
+```
+Une fois connecté une nouvelle barre de menu verticale apparait sur la gauche et contient les différentes configurations accessibles en mode administrateur.
 
 ![Figure 1](Figure1.png "Figure 1 : page d'accueil de l'application MEAN.IO par défaut une fois loggué (en mode non administrateur le menu vertical sur la gauche n'est pas apparent)")
 
@@ -55,6 +59,14 @@ Pour lancer le serveur exécutez ensuite simplement la commande `gulp` puis conn
 > ```
 > mean status
 > ```
+
+> **Trucs & Astuces** : sous Windows l'imbrication des modules node pose parfois des problèmes de chemins trop longs et il devient impossible d'effacer le dossier *node_modules*, pour cela j'utilise l'outil [rimraf](https://github.com/isaacs/rimraf) :
+> ```
+> npm install -g rimraf
+> rimraf node_modules
+> ```
+
+**Parler de Python pour node-gyp**
 
 ## Anatomie de l'application
 
