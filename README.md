@@ -1,6 +1,6 @@
 # Introduction à MEAN.IO
 
-Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introduire les principaux concepts du framework et d'obtenir un environnement de développement opérationnel pour les exercices pratiques des prochains articles.
+Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introduire les principaux concepts du framework et d'obtenir un environnement de développement opérationnel pour les exercices pratiques des prochains articles. Ce framework commençant à connaitre un certain "essor" (plus de 6 000 recommandations et 2 000 forks sur GitHub) je remercie Programmez! de me laisser l'occasion d'initier une des premières ressources francophone sur le sujet. 
 
 ## Présentation
 
@@ -8,13 +8,35 @@ Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introd
 
 ## Installation
 
-Afin de me simplifier la vie j'ai l'habitude d'utiliser des solutions pré-packagées pour l'infrastructure de développement ou de production. Pour MEAN.IO j'utilise celles de [Bitnami](https://bitnami.com/stack/mean) disponibles en environnement Windows, Linux Ubuntu ou de type Cloud comme Amazon. Elles ont l'avantage d'intégrer également un outil d'administration pour MongoDB nommé RockMongo.
+Afin de me simplifier la vie j'ai l'habitude d'utiliser des solutions pré-packagées pour l'infrastructure de développement ou de production. Pour MEAN.IO j'utilise celles de [Bitnami](https://bitnami.com/stack/mean) disponibles en environnement Windows, Linux Ubuntu ou de type Cloud comme Amazon. Elles ont l'avantage d'intégrer également Apache et un outil d'administration pour MongoDB nommé [RockMongo](https://github.com/iwind/rockmongo). Actuellement je travaille avec Node.js v0.12.4, MongoDB v3.0.3, MEAN.IO v0.5.
 
-L'outil utilisé par MEAN.IO pour exécuter les différentes tâches nécessaires au développement, aux tests et à la mise en production est gulp. Il faut également installer bower pour la gestion des dépendances côté front-end, npm de node.js étant utilisé côté back-end. Vous procéderez donc comme suit : 
+L'outil utilisé par MEAN.IO pour exécuter les différentes tâches nécessaires au développement, aux tests et à la mise en production est [gulp](http://gulpjs.com/). Il faut également installer [bower](http://bower.io/) pour la gestion des dépendances côté front-end, npm de Node.js étant utilisé côté back-end. Vous procéderez donc comme suit : 
 ```
-$ npm install -g gulp
-$ npm install -g bower 
+npm install -g gulp
+npm install -g bower 
 ```
+
+Bien qu'il soit possible de cloner directement le dépôt GitHub de MEAN.IO, il est conseillé de passer par l'outil en ligne de commande dédié nommé [mean-cli](https://www.npmjs.com/package/mean-cli) en l'installant via :
+```
+npm install -g mean-cli
+```
+Il est ensuite possible d'initialiser une application dans un dossier via les commandes suivantes :
+```
+mean init folder_name
+cd folder_name
+npm install
+```
+> MEAN.IO inclut un script (voir dossier *tools/scripts*) exécuté lors de la commande d'installation qui installe les dépendances back-end et front-end de tous les modules de l'application, il est donc inutile d'exécuter le classique *bower install*
+
+De la même façon il sera possible (nous y reviendrons plus tard) d'initialiser un package de l'application dans un dossier via :
+```
+mean package folder_name
+```
+
+> **Trucs & Astuces** : exécutez la commande suivante dans le dossier racine de l'application pour obtenir toutes les informations de version sur MEAN.IO (utile par exemple lors de la soumission de bugs sur le tracker) :
+> ```
+> mean status
+> ```
 
 ## Conclusion
 
