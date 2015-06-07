@@ -26,17 +26,35 @@ mean init folder_name
 cd folder_name
 npm install
 ```
-> MEAN.IO inclut un script (voir dossier *tools/scripts*) exécuté lors de la commande d'installation qui installe les dépendances back-end et front-end de tous les modules de l'application, il est donc inutile d'exécuter le classique *bower install*
 
-De la même façon il sera possible (nous y reviendrons plus tard) d'initialiser un package de l'application dans un dossier via :
+> MEAN.IO inclut un script (voir dossier *tools/scripts*) exécuté lors de la commande d'installation qui installe les dépendances back-end et front-end de tous les modules de l'application, il est donc inutile d'exécuter le classique `bower install`
+
+De la même façon il sera possible (nous y reviendrons plus tard) d'initialiser un package (i.e. un module) de l'application dans un dossier via :
 ```
 mean package folder_name
 ```
+
+Le première chose à faire est de créer une base de données avec un utilisateur ayant les droits d'accès, pour cela utiliser le shell de MongoDB en le lançant via votre compte administrateur de la base de données (configuré à l'installation) :
+```
+mongo admin --username root --password root
+db = db.getSiblingDB('mean-dev')
+db.createUser( { user: "mean-dev", pwd: "mean-dev", roles: [ "readWrite", "dbAdmin" ]} )
+```
+Il faut ensuite modifier la configuration par défaut de MEAN.IO pour utiliser cette base et cet utilisateur, pour cela ouvrir le fichier *development.js* dans le dossier *config/env* et changer la valeur de la clef **db** :
+```javascript
+module.exports = {
+  db: 'mongodb://mean-dev:mean-dev@localhost:27017/mean-dev',
+  debug: true,
+  ...
+```
+Pour lancer le serveur exécutez ensuite simplement la commande `gulp` puis connectez-vous avec votre browser à l'adresse [http://localhost:3000/](http://localhost:3000/). Vous pouvez créer votre premier utilisateur pour vous connecter à l'application via l'entrée *Join* dans la barre de menu.  
 
 > **Trucs & Astuces** : exécutez la commande suivante dans le dossier racine de l'application pour obtenir toutes les informations de version sur MEAN.IO (utile par exemple lors de la soumission de bugs sur le tracker) :
 > ```
 > mean status
 > ```
+
+## Anatomie d'un module
 
 ## Conclusion
 
