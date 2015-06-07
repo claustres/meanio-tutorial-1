@@ -47,7 +47,9 @@ module.exports = {
   debug: true,
   ...
 ```
-Pour lancer le serveur exécutez ensuite simplement la commande `gulp` puis connectez-vous avec votre browser à l'adresse [http://localhost:3000/](http://localhost:3000/). Vous pouvez créer votre premier utilisateur pour vous connecter à l'application via l'entrée *Join* dans la barre de menu.  
+Pour lancer le serveur exécutez ensuite simplement la commande `gulp` puis connectez-vous avec votre browser à l'adresse [http://localhost:3000/](http://localhost:3000/). Vous pouvez créer votre premier utilisateur pour vous connecter à l'application via l'entrée *Join* dans la barre de menu. A ce stade vous ne devriez avoir que deux entrées accessibles dans la barre de menu en plus du menu associé à votre profil (voir Figure 1).
+
+![Figure 1](Figure1.png "Figure 1 : page d'accueil de l'application MEAN.IO par défaut une fois loggué (en mode non administrateur le menu vertical sur la gauche n'est pas apparent)")
 
 > **Trucs & Astuces** : exécutez la commande suivante dans le dossier racine de l'application pour obtenir toutes les informations de version sur MEAN.IO (utile par exemple lors de la soumission de bugs sur le tracker) :
 > ```
