@@ -1,10 +1,12 @@
-# Introduction à MEAN.IO
+# MEAN.IO (1/3)
 
 Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introduire les principaux concepts du framework et d'obtenir un environnement de développement opérationnel pour les exercices pratiques des prochains articles. Ce framework commençant à connaitre un certain "essor" (plus de 6 000 recommandations et 2 000 forks sur GitHub) je remercie Programmez! de me laisser l'occasion d'initier une des premières ressources francophone sur le sujet. 
 
-## Présentation
+## Introduction
 
 [MEAN.IO](http://mean.io/), est un framework Javascript "full-stack" permettant de créer rapidement une application web avec [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), et [AngularJS](http://angularjs.org/). Le terme "full-stack" indique qu'il permet de gérer l'intégralité des couches de l'application en Javascript, depuis la base de données, en passant par l'API back-end jusqu'au front-end.
+
+Bien que cet article aborde l'utilisation de ces technologies (et d'autres comme [Mongoose](http://mongoosejs.com/) ou encore [Bootstrap](http://getbootstrap.com/)) au travers de leur utilisation dans MEAN.IO, je vous conseille en prérequis d'acquérir les bases de programmation dans ces différents framework/librairies.
 
 ## Installation
 
