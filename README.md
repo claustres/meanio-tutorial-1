@@ -8,7 +8,7 @@ Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introd
 
 ## Installation
 
-Afin de me simplifier la vie j'ai l'habitude d'utiliser des solutions pré-packagées pour l'infrastructure de développement ou de production. Pour MEAN.IO j'utilise celles de [Bitnami](https://bitnami.com/stack/mean) disponibles en environnement Windows, Linux Ubuntu ou de type Cloud comme Amazon. Elles ont l'avantage d'intégrer également Apache et un outil d'administration pour MongoDB nommé [RockMongo](https://github.com/iwind/rockmongo). Actuellement je travaille avec Node.js v0.12.4, MongoDB v3.0.3, MEAN.IO v0.5.
+Afin de me simplifier la vie j'ai l'habitude d'utiliser des solutions pré-packagées pour l'infrastructure de développement ou de production. Pour MEAN.IO j'utilise celles de [Bitnami](https://bitnami.com/stack/mean) disponibles en environnement Windows, Linux Ubuntu ou de type Cloud comme Amazon. Elles ont l'avantage d'intégrer également Apache, un outil d'administration pour MongoDB nommé [RockMongo](https://github.com/iwind/rockmongo) et [Git](http://git-scm.com/download/) dont vous aurez besoin pour MEAN.IO. Actuellement je travaille avec Node.js v0.12.4, MongoDB v3.0.3, MEAN.IO v0.5.
 
 L'outil utilisé par MEAN.IO pour exécuter les différentes tâches nécessaires au développement, aux tests et à la mise en production est [gulp](http://gulpjs.com/). Il faut également installer [bower](http://bower.io/) pour la gestion des dépendances côté front-end, npm de Node.js étant utilisé côté back-end. Vous procéderez donc comme suit : 
 ```
@@ -69,6 +69,23 @@ Une fois connecté une nouvelle barre de menu verticale apparait sur la gauche e
 **Parler de Python pour node-gyp**
 
 ## Anatomie de l'application
+
+```
+Application folder
+--- bower_components : contient les dépendances Bower (front-end)
+--- config
+    --- env
+    --- middlewares
+--- gulp
+--- logs
+--- node_modules : contient les dépendances Node.js (back-end)
+--- packages
+    --- core
+    --- custom
+--- tools
+    --- scripts
+    --- test
+```
 
 ## Anatomie d'un module
 
