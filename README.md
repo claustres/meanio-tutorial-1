@@ -70,24 +70,47 @@ Une fois connecté une nouvelle barre de menu verticale apparait sur la gauche e
 
 ## Anatomie de l'application
 
+Une fois initialisé le dossier d'une application MEAN.IO présente la structure suivante :
 ```
 Application folder
 --- bower_components : contient les dépendances Bower (front-end)
---- config
+--- config : fichiers de configuration (Express, base de données, etc.)
     --- env
     --- middlewares
---- gulp
---- logs
+--- gulp : fichiers décrivant les différentes tâches gulp en fonction de l'environnement
+--- logs : contient les logs en sortie de Node.js
 --- node_modules : contient les dépendances Node.js (back-end)
---- packages
-    --- core
-    --- custom
---- tools
+--- packages : contient l'ensemble des modules de l'application
+    --- core : modules de base inclus avec MEAN.IO
+    --- custom : modules spécifiques à la logique applicative
+--- tools : 
     --- scripts
     --- test
 ```
 
 ## Anatomie d'un module
+
+Le dossier d'un package ou module MEAN.IO présente la structure suivante :
+```
+Module folder
+--- docs : contient la documentation de l'API (back-end)
+--- public : partie publique du module sur le site
+    --- assets : données statiques (images, css, dépendances front-end)
+    --- controllers : controllers front-end (AngularJS)
+    --- routes : routing front-end (AngularUI Router)
+    --- services : services front-end (AngularJS)
+    --- tests : tests front-end (Jasmine)
+    --- views : vues (AngularJS)
+--- server : contient le code back-end
+    --- controllers : controllers back-end (Express)
+    --- routes : routing back-end (Express)
+    --- models : modèle de données back-end (Mongoose)
+    --- tests : tests back-end (Jasmine)
+    --- views : vues HMTL (templating Swig)
+--- node_modules : contient les dépendances Node.js du module (back-end)
+```
+
+> **Trucs & Astuces** : par défaut, à l'intérieur de chaque module de base de MEAN.IO, les fichiers portent le même nom (celui du module comme par exemple *Module.js*). Je préfère suffixer chaque fichier par le type d'objet qu'il contient (par exemple *ModuleController.js*, *ModuleRoutes.js*, etc.). En effet, même si le nom du dossier parent peut servir de discriminant, il est ainsi plus aisé de savoir à quel fichier l'on a affaire. Notamment lorsqu'ils sont ouverts simultanément sous forme d'onglets ne laissant apparaitre que le nom du fichier (et non le chemin complet) dans votre éditeur de texte favori. 
 
 ## Coeur fonctionnel
 
