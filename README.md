@@ -168,7 +168,7 @@ Concernant les dépendances MEAN.IO offre deux possibilités :
  
 La première approche est utilisé de façon interne par MEAN.IO pour les dépendances globales du canevas comme AngularJS ou encore jQuery. Rien ne vous empêche de faire de même pour votre application, néanmoins ceci la rendra plus monolithique dans le sens où les dépendances de vos différents modules seront stockées de façon globale. Il deviendra donc impossible d'ajouter ou de supprimer un module simplement en déplaçant son dossier. L'avantage est par contre d'avoir toutes les dépendances localisées à un seul endroit : **bower_components** pour Bower (front-end) et **node_modules** pour Node.js (back-end).
 
-La seconde approche permet à chaque module de déclarer ses dépendances et donc de rester complètement indépendant du canevas. Ceci se fait dans le fichier **app.js** du module :
+La seconde approche permet à chaque module de déclarer ses dépendances et donc de rester complètement indépendant du canevas. Le chemin des fichiers JS et CSS doit être donné relativement aux dossiers **public/assets/js** et **public/assets/css*. Ceci se fait dans le fichier **app.js** du module :
 ```javascript
 // Ajout d'une librairie externe
 Module.aggregateAsset('js','lib.js');
@@ -183,7 +183,7 @@ Module.aggregateAsset('js','first.js',{weight: -1, group: 'header'});
 // Ajout d'une librairie externe dans le footer
 Module.aggregateAsset('js','last.js',{group: 'footer'});
 ```
-Avec cette approche les dépendances d'un module sont généralement installées localement au module. Le script d'installation de MEAN.IO parcours en effet automatiquement tous les modules et exécute à l'intérieur un `npm/bower install`. NPM installera donc les dépendances indiquées dans le fichier **package.json** dans le dossier **node_modules** et il semble impossible de changer ce comportement par défaut. Néanmoins, comme NPM utilise une stratégie récursive de recherche des modules celà ne pose aucun problème particulier. Node.js installe automatiquement les dépendances indiquées dans le fichier **bower.json** dans le dossier **public/assets/js**.
+Avec cette approche les dépendances d'un module sont généralement installées localement au module. Le script d'installation de MEAN.IO parcours en effet automatiquement tous les modules et exécute à l'intérieur un `npm/bower install`. NPM installera donc les dépendances indiquées dans le fichier **package.json** dans le dossier **node_modules** et il semble impossible de changer ce comportement par défaut. Néanmoins, comme NPM utilise une stratégie récursive de recherche des modules celà ne pose aucun problème particulier. La stratégie concernant Bower consiste, via un fichier **.bowerrc**, à lui faire installer les dépendances indiquées dans le fichier **bower.json** dans le dossier **public/assets/js**.
 ```
 {
   "directory": "public/assets/lib"
