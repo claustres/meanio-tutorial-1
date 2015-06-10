@@ -115,7 +115,9 @@ Les options communes à tous les environnements sont stockées dans le fichier *
 - **db** : l'URL d'accès à la base de données, peut inclure un login/password de la forme *mongodb://login:passwordv@host:port/base*
 - **hostname** : le nom de l'hôte
 - **http/https.port** : le numéro de port à utiliser
+- **app.name** : le nom de l'application
 - **aggregate** : true/false pour activer/désactiver l'aggrégation
+- **secret** : secret pour la sécurisation via JWT (voir ci-après)
 
 ### Anatomie d'un module
 
@@ -145,11 +147,15 @@ Pour rajouter un module au canevas il suffit de lui donner un nom unique dans l'
 
 ### Coeur fonctionnel
 
-#### Aggrégation
-
 #### Authentification
 
-#### Barre de menu
+Le canevas inclus la gestion des utilisateurs et de leurs rôles. Vous disposez donc d'une page pour enregistrer un nouvel utilisateur, d'une page pour se connecter à l'application, d'une page de réinitialisation du mot de passe (nécessite toutefois de configurer un serveur SMTP) et d'une page d'index accessible de façon publique. Si vous avez le rôle administrateur ('admin') vous héritez aussi d'une IHM de gestion des utilisateurs (ajout, suppression, affectation de rôle). 
+
+Si l'authentification nous permettra d'adpater les pages accessibles en fonction du rôle de l'utilisateur, elle sert également à protéger l'accès à l'API côté back-end. Pour ce faire elle se base sur JSON Web Token ([JWT](http://jwt.io/)), qui est une spécification pour l'authentification. Un JWT est un objet JSON que le serveur encode en utilisant une clé privée. L'objet JSON encodé se présente sous la forme d'un token qui est renvoyé au client qui s'est authentifié avec succès. Dans MEAN.IO ce se passe lors de la connexion qui déclenche un appel vers l'URL */api/login* de l'API. Via un intercepteur AngularJS, la partie cliente MEAN.IO enverra ensuite à chaque requête faite au serveur ce token. Si en utilisant sa clé privée le serveur parvient à décoder le token, il s'assure de l'authenticité du client et autorise la requête.
+
+#### Menus
+
+#### Aggrégation
 
 ## Conclusion
 
