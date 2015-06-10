@@ -168,7 +168,22 @@ Concernant les dépendances MEAN.IO offre deux possibilités :
  
 La première approche est utilisé de façon interne par MEAN.IO pour les dépendances globales du canevas comme AngularJS ou encore jQuery. Rien ne vous empêche de faire de même pour votre application, néanmoins ceci la rendra plus monolithique dans le sens où les dépendances de vos différents modules seront stockées de façon globale. Il deviendra donc impossible d'ajouter ou de supprimer un module simplement en déplaçant son dossier. L'avantage est par contre d'avoir toutes les dépendances localisées à un seul endroit : **bower_components** pour Bower (front-end) et **node_modules** pour Node.js (back-end).
 
-La seconde approche permet à chaque module de déclarer ses dépendances et donc de rester complètement indépendant du canevas.
+La seconde approche permet à chaque module de déclarer ses dépendances et donc de rester complètement indépendant du canevas. Ceci se fait dans le fichier **app.js** du module :
+```javascript
+// Ajout d'une librairie externe
+Module.aggregateAsset('js','lib.js');
+
+// Ajout du fichier CSS du module
+Module.aggregateAsset('css','module.css');
+```
+Il est possible de contrôler l'aggrégation plus finement si nécessaire
+```javascript
+// Ajout d'une librairie externe dans le header et avant les suivantes (par défaut le poids vaut 0)
+Module.aggregateAsset('js','first.js',{weight: -1, group: 'header'});
+// Ajout d'une librairie externe dans le footer
+Module.aggregateAsset('js','last.js',{group: 'footer'});
+```
+Avec cette approche les dépendances d'un module sont généralement installées localement.
 
 ## Conclusion
 
