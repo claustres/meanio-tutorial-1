@@ -183,7 +183,13 @@ Module.aggregateAsset('js','first.js',{weight: -1, group: 'header'});
 // Ajout d'une librairie externe dans le footer
 Module.aggregateAsset('js','last.js',{group: 'footer'});
 ```
-Avec cette approche les dépendances d'un module sont généralement installées localement.
+Avec cette approche les dépendances d'un module sont généralement installées localement au module. Le script d'installation de MEAN.IO parcours en effet automatiquement tous les modules et exécute à l'intérieur un `npm/bower install`. NPM installera donc les dépendances indiquées dans le fichier **package.json** dans le dossier **node_modules** et il semble impossible de changer ce comportement par défaut. Néanmoins, comme NPM utilise une stratégie récursive de recherche des modules celà ne pose aucun problème particulier. Node.js installe automatiquement les dépendances indiquées dans le fichier **bower.json** dans le dossier **public/assets/js**.
+```
+{
+  "directory": "public/assets/lib"
+}
+```
+> **Trucs & Astuces** : Personnellement je préfère installer les dépendances dans le dossier **bower_components** à la racine car comme Bower n'utilise pas une stratégie récursive de recherche contrairement à NPM il est possible qu'une même dépendance utilisée par deux modules différents soit en doublon, causant par la même des problèmes à l'exécution. 
 
 ## Conclusion
 
