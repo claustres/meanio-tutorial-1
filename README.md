@@ -70,7 +70,11 @@ Une fois connecté une nouvelle barre de menu verticale apparait sur la gauche e
 
 **Parler de Python pour node-gyp**
 
-## Anatomie de l'application
+## Fonctionnement
+
+Le principal objectif de MEAN.IO est de fournir un canevas en terme d’usine logicielle et de structure de base, ainsi que les mécanismes d’extension, pour développer une application. Le mécanisme d'extension passe par le développement d'un package ou d'un module qui est un ensemble de fonctionnalités (services back-end + composants front-end) permettant d’étendre le canevas. Comme il n'est pas forcément nécessaire pour une application donnée, il s’intègre au sein du canevas selon une règle bien définie si besoin tel un "plugin" (i.e. "greffon").
+
+### Anatomie d'une application
 
 Une fois initialisé le dossier d'une application MEAN.IO présente la structure suivante :
 ```
@@ -90,7 +94,30 @@ Application folder
     --- test
 ```
 
-## Anatomie d'un module
+A la racine on trouve tous les fichiers de configuration pour les outils de l'usine logicielle que sont npm, bower, gulp, jshint, karma, protractor, etc. Le répertoire **config** contient l'ensemble des fichiers de configuration, notamment *express.js* et le dossier **middlewares** pour Express et le dossier **env** pour les options propres à MEAN.IO. De façon classique l'application peut être lancé dans différents environnements :
+
+- **development** : environnement utilisé pendant le développement
+- **test** : environnement utilisé pour lancer les tests
+- **production** : environnement utilisé pour la production
+
+Pour définir l'environnement il est possible de passer par la variable d'environnement **NODE_ENV** avant de lancer le serveur :
+```
+set NODE_ENV=production
+gulp
+```
+Il est aussi possible d'invoquer directement le serveur en passant l'environnement en paramètre :
+```
+gulp production
+```
+Les options communes à tous les environnements sont stockées dans le fichier **env/all.js**, les options propres à chaque  environnement sont stockées dans un fichier portant le nom de l'environnement dans le dossier **env**. Une liste non exhaustive des options de configuration est la suivante :
+
+- **root** : le chemin vers la racine de l'application
+- **db** : l'URL d'accès à la base de données, peut inclure un login/password de la forme *mongodb://login:passwordv@host:port/base*
+- **hostname** : le nom de l'hôte
+- **http/https.port** : le numéro de port à utiliser
+- **aggregate** : true/false pour activer/désactiver l'aggrégation
+
+### Anatomie d'un module
 
 Le dossier d'un package ou module MEAN.IO présente la structure suivante :
 ```
@@ -114,13 +141,15 @@ Module folder
 
 > **Trucs & Astuces** : par défaut, à l'intérieur de chaque module de base de MEAN.IO, les fichiers portent le même nom (celui du module comme par exemple *Module.js*). Je préfère suffixer chaque fichier par le type d'objet qu'il contient (par exemple *ModuleController.js*, *ModuleRoutes.js*, etc.). En effet, même si le nom du dossier parent peut servir de discriminant, il est ainsi plus aisé de savoir à quel fichier l'on a affaire. Notamment lorsqu'ils sont ouverts simultanément sous forme d'onglets ne laissant apparaitre que le nom du fichier (et non le chemin complet) dans votre éditeur de texte favori. 
 
-## Coeur fonctionnel
+Pour rajouter un module au canevas il suffit de lui donner un nom unique dans l'application et de le copier dans le répertoire **packages/custom** de l'application, MEAN.IO se charge du reste !
 
-### Aggrégation
+### Coeur fonctionnel
 
-### Authentification
+#### Aggrégation
 
-### Barre de menu
+#### Authentification
+
+#### Barre de menu
 
 ## Conclusion
 
