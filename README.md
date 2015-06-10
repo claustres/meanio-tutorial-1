@@ -4,7 +4,7 @@ Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introd
 
 ## Introduction
 
-[MEAN.IO](http://mean.io/), est un framework Javascript "full-stack" permettant de créer rapidement une application web avec [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), et [AngularJS](http://angularjs.org/). Le terme "full-stack" indique qu'il permet de gérer l'intégralité des couches de l'application en Javascript, depuis la base de données, en passant par l'API back-end jusqu'au front-end.
+[MEAN.IO](http://mean.io/), est un framework Javascript "full-stack" permettant de créer rapidement une application web de type single-page application (SPA) avec [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), et [AngularJS](http://angularjs.org/). Le terme "full-stack" indique qu'il permet de gérer l'intégralité des couches de l'application en Javascript, depuis la base de données, en passant par l'API back-end jusqu'au front-end.
 
 Bien que cet article aborde l'utilisation de ces technologies (et d'autres comme [Mongoose](http://mongoosejs.com/) ou encore [Bootstrap](http://getbootstrap.com/)) au travers de leur utilisation dans MEAN.IO, je vous conseille en prérequis d'acquérir les bases de programmation dans ces différents framework/librairies.
 
@@ -141,6 +141,8 @@ Module folder
 --- node_modules : contient les dépendances Node.js du module (back-end)
 ```
 
+A la racine on trouve comme dans le cas de l'application les fichiers de configuration pour npm, bower et MEAN.IO (**mean.json**). Le plus important est le fichier **app.js** qui est le point d'entrée du module. Tous les fichiers à l'intérieur du dossier **public** seront accessibles publiquement à l'URL */nom-module/chemin-relatif-fichier*. Par exemple pour accéder à un contrôleur AngularJS nommé 'controller' dans le module nommé 'module' l'URL sera *module/controllers/controller.js*.
+
 > **Trucs & Astuces** : par défaut, à l'intérieur de chaque module de base de MEAN.IO, les fichiers portent le même nom (celui du module comme par exemple *Module.js*). Je préfère suffixer chaque fichier par le type d'objet qu'il contient (par exemple *ModuleController.js*, *ModuleRoutes.js*, etc.). En effet, même si le nom du dossier parent peut servir de discriminant, il est ainsi plus aisé de savoir à quel fichier l'on a affaire. Notamment lorsqu'ils sont ouverts simultanément sous forme d'onglets ne laissant apparaitre que le nom du fichier (et non le chemin complet) dans votre éditeur de texte favori. 
 
 Pour rajouter un module au canevas il suffit de lui donner un nom unique dans l'application et de le copier dans le répertoire **packages/custom** de l'application, MEAN.IO se charge du reste !
@@ -156,6 +158,17 @@ Si l'authentification permet d'adpater le contenu de l'application (menus et pag
 #### Menus
 
 #### Aggrégation
+
+Afin de pouvoir rajouter un module au canevas sans devoir modifier un quelconque fichier, MEAN.IO intègre un mécanisme automatique d'aggrégation, tant pour les fichiers applicatifs que pour les dépendances. Celui-ci repose principalement sur du templating côté serveur, par défaut tous les fichiers JS du dossier **public** de chaque module sont aggrégés à l'exception du sous dossier **assets** réservé pour le stockage des librairies externes, des images et des fichiers CSS. En environnement de production les fichiers sont également minifiés.
+
+Concernant les dépendances MEAN.IO offre deux possibilités :
+
+ - l'utilisation du fichier global **config/assets.json** qui contient une liste de fichiers JS/CSS externes
+ - l'ajout des fichiers externes directement via le code source de chaque module
+ 
+La première approche est utilisé de façon interne par MEAN.IO pour les dépendances globales du canevas comme AngularJS ou encore jQuery. Rien ne vous empêche de faire de même pour votre application, néanmoins ceci la rendra plus monolithique dans le sens où les dépendances de vos différents modules seront stockées de façon globale. Il deviendra donc impossible d'ajouter ou de supprimer un module simplement en déplaçant son dossier. L'avantage est par contre d'avoir toutes les dépendances localisées à un seul endroit : **bower_components** pour Bower (front-end) et **node_modules** pour Node.js (back-end).
+
+La seconde approche permet à chaque module de déclarer ses dépendances et donc de rester complètement indépendant du canevas.
 
 ## Conclusion
 
