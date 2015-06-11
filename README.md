@@ -4,13 +4,15 @@ Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introd
 
 ## Introduction
 
-[MEAN.IO](http://mean.io/), est un framework Javascript "full-stack" permettant de créer rapidement une application web de type single-page application (SPA) avec [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), et [AngularJS](http://angularjs.org/). Le terme "full-stack" indique qu'il permet de gérer l'intégralité des couches de l'application en Javascript, depuis la base de données, en passant par l'API back-end jusqu'au front-end.
+[MEAN.IO](http://mean.io/), est un framework Javascript "full-stack" permettant de créer rapidement une application web de type single-page application (SPA) avec [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), et [AngularJS](http://angularjs.org/) (MEAN). Le terme "full-stack" indique qu'il permet de gérer l'intégralité des couches de l'application en Javascript, depuis la base de données, en passant par l'API back-end jusqu'au front-end. Nous verrons que MEAN.IO est un framework au sens "cadre de travail" pour développer une application plutôt qu'au sens ensemble de librairies/composants.
 
-Bien que cet article aborde l'utilisation de ces technologies (et d'autres comme [Mongoose](http://mongoosejs.com/) ou encore [Bootstrap](http://getbootstrap.com/)) au travers de leur utilisation dans MEAN.IO, je vous conseille en prérequis d'acquérir les bases de programmation dans ces différents framework/librairies.
+Bien que cet article aborde l'utilisation des technologies MEAN (et d'autres comme [Mongoose](http://mongoosejs.com/) ou encore [Bootstrap](http://getbootstrap.com/)) au travers de leur utilisation dans MEAN.IO, je vous conseille en prérequis d'acquérir les bases de programmation dans ces différents framework/librairies.
 
 ## Installation
 
 Afin de me simplifier la vie j'ai l'habitude d'utiliser des solutions pré-packagées pour l'infrastructure de développement ou de production. Pour MEAN.IO j'utilise celles de [Bitnami](https://bitnami.com/stack/mean) disponibles en environnement Windows, Linux Ubuntu ou de type Cloud comme Amazon. Elles ont l'avantage d'intégrer également Apache, un outil d'administration pour MongoDB nommé [RockMongo](https://github.com/iwind/rockmongo) et [Git](http://git-scm.com/download/) dont vous aurez besoin pour MEAN.IO. Actuellement je travaille avec Node.js v0.12.4, MongoDB v3.0.3, MEAN.IO v0.5.
+
+Certaines dépendances de MEAN.IO utilisent [node-gyp](https://github.com/TooTallNate/node-gyp) (comme les drivers MongoDB) il faut donc disposer en pré-requis de Python version 2.7.x et d'un compilateur C++ comme GCC sous Linux ou Microsoft Visual Studio C++ sous Windows.
 
 L'outil utilisé par MEAN.IO pour exécuter les différentes tâches nécessaires au développement, aux tests et à la mise en production est [gulp](http://gulpjs.com/). Il faut également installer [bower](http://bower.io/) pour la gestion des dépendances côté front-end, npm de Node.js étant utilisé côté back-end. Vous procéderez donc comme suit : 
 ```
@@ -22,7 +24,7 @@ Bien qu'il soit possible de cloner directement le dépôt GitHub de MEAN.IO, il 
 ```
 npm install -g mean-cli
 ```
-Il est ensuite possible d'initialiser une application dans un dossier via les commandes suivantes :
+Il est ensuite possible d'initialiser une application dans un dossier grâce aux commandes suivantes :
 ```
 mean init folder_name
 cd folder_name
@@ -49,11 +51,11 @@ module.exports = {
   debug: true,
   ...
 ```
-Pour lancer le serveur exécutez ensuite simplement la commande `gulp` puis connectez-vous avec votre browser à l'adresse [http://localhost:3000/](http://localhost:3000/). Vous pouvez créer votre premier utilisateur pour vous connecter à l'application via l'entrée *Join* dans la barre de menu. A ce stade vous ne devriez avoir que deux entrées accessibles dans la barre de menu en plus du menu associé à votre profil (voir Figure 1). Pour rendre l'utilisateur créé administrateur de l'application utilisez la commande suivante :
+Pour lancer le serveur exécutez simplement la commande `gulp` puis connectez-vous avec votre browser à l'adresse [http://localhost:3000/](http://localhost:3000/). Vous pouvez créer votre premier utilisateur pour vous connecter à l'application via l'entrée *Join* dans la barre de menu. A ce stade vous ne devriez avoir que deux entrées accessibles dans la barre de menu en plus du menu associé à votre profil (voir Figure 1). Pour rendre l'utilisateur créé administrateur de l'application utilisez la commande suivante :
 ```
 mean user email@google.com --addRole admin
 ```
-Une fois connecté une nouvelle barre de menu verticale apparait sur la gauche et contient les différentes configurations accessibles en mode administrateur.
+Une fois connecté une nouvelle barre de menu verticale apparait sur la gauche et contient les différentes options de configuration accessibles en mode administrateur.
 
 ![Figure 1](Figure1.png "Figure 1 : page d'accueil de l'application MEAN.IO par défaut une fois loggué (en mode non administrateur le menu vertical sur la gauche n'est pas apparent)")
 
@@ -73,6 +75,28 @@ Une fois connecté une nouvelle barre de menu verticale apparait sur la gauche e
 ## Fonctionnement
 
 Le principal objectif de MEAN.IO est de fournir un canevas en terme d’usine logicielle et de structure de base, ainsi que les mécanismes d’extension, pour développer une application. Le mécanisme d'extension passe par le développement d'un package ou d'un module qui est un ensemble de fonctionnalités (services back-end + composants front-end) permettant d’étendre le canevas. Comme il n'est pas forcément nécessaire pour une application donnée, il s’intègre au sein du canevas selon une règle bien définie si besoin tel un "plugin" (i.e. "greffon").
+
+De façon classique une application MEAN.IO peut être lancée dans différents environnements :
+
+- **development** : environnement utilisé pendant le développement
+- **test** : environnement utilisé pour lancer les tests
+- **production** : environnement utilisé pour la production
+
+Pour définir l'environnement il est possible de passer par la variable d'environnement **NODE_ENV** avant de lancer le serveur :
+```
+set NODE_ENV=production
+gulp
+```
+Il est aussi possible d'invoquer directement le serveur en passant l'environnement en paramètre :
+```
+gulp production
+```
+
+Les tâches par défaut exécutées par gulp suivant l'environnement sont les suivantes :
+
+- **development** : exécution de [JSHint](http://jshint.com/), [CSSLint](https://github.com/CSSLint/csslint), [Less](http://lesscss.org/), [CoffeeScript](http://coffeescript.org/) sur le code et lancement du serveur en mode debug
+- **test** : exécution de [Karma](http://jshint.com/) et de [Mocha](http://mochajs.org/)
+- **production** : minification du code CSS/JS des dépendances et lancement du serveur
 
 ### Anatomie d'une application
 
@@ -94,22 +118,7 @@ Application folder
     --- test
 ```
 
-A la racine on trouve tous les fichiers de configuration pour les outils de l'usine logicielle que sont npm, bower, gulp, jshint, karma, protractor, etc. Le répertoire **config** contient l'ensemble des fichiers de configuration, notamment *express.js* et le dossier **middlewares** pour Express et le dossier **env** pour les options propres à MEAN.IO. De façon classique l'application peut être lancé dans différents environnements :
-
-- **development** : environnement utilisé pendant le développement
-- **test** : environnement utilisé pour lancer les tests
-- **production** : environnement utilisé pour la production
-
-Pour définir l'environnement il est possible de passer par la variable d'environnement **NODE_ENV** avant de lancer le serveur :
-```
-set NODE_ENV=production
-gulp
-```
-Il est aussi possible d'invoquer directement le serveur en passant l'environnement en paramètre :
-```
-gulp production
-```
-Les options communes à tous les environnements sont stockées dans le fichier **env/all.js**, les options propres à chaque  environnement sont stockées dans un fichier portant le nom de l'environnement dans le dossier **env**. Une liste non exhaustive des options de configuration est la suivante :
+A la racine on trouve tous les fichiers de configuration pour les outils de l'usine logicielle que sont npm, bower, gulp, jshint, karma, protractor, etc. Le répertoire **config** contient l'ensemble des fichiers de configuration, notamment *express.js* et le dossier **middlewares** pour Express et le dossier **env** pour les options propres à MEAN.IO. Les options communes à tous les environnements sont stockées dans le fichier **env/all.js**, les options propres à chaque  environnement sont stockées dans un fichier portant le nom de l'environnement dans le dossier **env**. Une liste non exhaustive des options de configuration est la suivante :
 
 - **root** : le chemin vers la racine de l'application
 - **db** : l'URL d'accès à la base de données, peut inclure un login/password de la forme *mongodb://login:passwordv@host:port/base*
@@ -117,7 +126,7 @@ Les options communes à tous les environnements sont stockées dans le fichier *
 - **http/https.port** : le numéro de port à utiliser
 - **app.name** : le nom de l'application
 - **aggregate** : true/false pour activer/désactiver l'aggrégation
-- **secret** : secret pour la sécurisation via JWT (voir ci-après)
+- **secret** : clef privée pour la sécurisation via JWT (voir ci-après)
 
 ### Anatomie d'un module
 
@@ -193,7 +202,7 @@ Avec cette approche les dépendances d'un module sont généralement installées
 
 ## Conclusion
 
-Nous avons passé en revue dans cet article les grands principes de MEAN.IO. Pour ma part, même s'il est évident que le framework n'est pas encore mature (la version 0.5 courante au moment de rédaction de l'article est annoncée comme la release candidate à la version 1.0), il me semble déjà procurer une bonne base pour structurer des applications web full JavaScript :
+Nous avons passé en revue dans cet article les grands principes de MEAN.IO. Pour ma part, même s'il est évident que le framework n'est pas encore mature (la version 0.5 courante au moment de rédaction de l'article est annoncée comme la release candidate à la version 1.0), il me semble déjà procurer une bonne base pour structurer des applications web SPA full JavaScript :
 
  - une architecture modulaire orientée composant (un module est un plugin qui peut être rajouté à l'application sans nécessité de modifier l'existant)
  - une organisation de fichiers à l'intérieur de chaque module qui permet de simplifier le développement en automatisant la déclaration des modèles, des routes et des dépendances
@@ -202,4 +211,7 @@ Nous avons passé en revue dans cet article les grands principes de MEAN.IO. Pou
  - un réseau naissant de modules d'extension portés par la communauté
  - tout en étant Open Source il reste porté par une entreprise qui l'utilise pour ses projets internes, ce qui peut éviter un essouflement rapide de la communauté
 
-A noter que le lead développeur historique de MEAN.IO a quitté l'entreprise et créé un fork nommé [MEAN.JS](http://meanjs.org/). A ce stade il reste moins populaire malgré un départ assez fulgurant, le plus inquiétant étant le fait que les commits semblent se faire rare depuis quelques mois. De plus, MEAN.JS sépare les parties back-end et front-end contrairement à l'approche par composant de MEAN.IO, ce qui me parait moins élégant d'un point de vue structure.
+> A noter que le lead développeur historique de MEAN.IO a quitté l'entreprise et créé un fork nommé [MEAN.JS](http://meanjs.org/). A ce stade il reste moins populaire malgré un départ assez fulgurant, le plus inquiétant étant le fait que les commits semblent se faire rare depuis quelques mois. De plus, MEAN.JS sépare les parties back-end et front-end contrairement à l'approche par composant de MEAN.IO, ce qui me parait moins élégant d'un point de vue structure.
+
+Dans le prochain article nous aborderons la création d'un module MEAN.IO.
+
