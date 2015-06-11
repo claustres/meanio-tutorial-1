@@ -70,11 +70,9 @@ Une fois connecté une nouvelle barre de menu verticale apparait sur la gauche e
 > rimraf node_modules
 > ```
 
-**Parler de Python pour node-gyp**
-
 ## Fonctionnement
 
-Le principal objectif de MEAN.IO est de fournir un canevas en terme d’usine logicielle et de structure de base, ainsi que les mécanismes d’extension, pour développer une application. Le mécanisme d'extension passe par le développement d'un package ou d'un module qui est un ensemble de fonctionnalités (services back-end + composants front-end) permettant d’étendre le canevas. Comme il n'est pas forcément nécessaire pour une application donnée, il s’intègre au sein du canevas selon une règle bien définie si besoin tel un "plugin" (i.e. "greffon").
+Le principal objectif de MEAN.IO est de fournir un canevas en terme d’usine logicielle et de structure de base, ainsi qu'un mécanisme d’extension, pour développer une application. Celui-ci passe par le développement d'un package ou d'un module qui est un ensemble de fonctionnalités (services back-end + composants front-end) permettant d’étendre le canevas. Comme il n'est pas forcément nécessaire pour une application donnée, il s’intègre au sein du canevas selon une règle bien définie si besoin tel un "plugin" (i.e. "greffon").
 
 De façon classique une application MEAN.IO peut être lancée dans différents environnements :
 
@@ -127,6 +125,7 @@ A la racine on trouve tous les fichiers de configuration pour les outils de l'us
 - **app.name** : le nom de l'application
 - **aggregate** : true/false pour activer/désactiver l'aggrégation
 - **secret** : clef privée pour la sécurisation via JWT (voir ci-après)
+- informations pour se connecter via des réseaux sociaux
 
 ### Anatomie d'un module
 
@@ -162,9 +161,7 @@ Pour rajouter un module au canevas il suffit de lui donner un nom unique dans l'
 
 Le canevas inclus la gestion des utilisateurs et de leurs rôles. Vous disposez donc d'une page pour enregistrer un nouvel utilisateur, d'une page pour se connecter à l'application, d'une page de réinitialisation du mot de passe (nécessite toutefois de configurer un serveur SMTP) et d'une page d'index accessible de façon publique. Si vous avez le rôle administrateur ('admin') vous héritez aussi d'une IHM de gestion des utilisateurs (ajout, suppression, affectation de rôle). 
 
-Si l'authentification permet d'adpater le contenu de l'application (menus et pages) en fonction du rôle de l'utilisateur, elle sert également à protéger l'accès à l'API côté back-end. Pour ce faire elle se base sur JSON Web Token ([JWT](http://jwt.io/)), qui est une spécification pour l'authentification. Un JWT est un objet JSON que le serveur encode en utilisant une clé privée. L'objet JSON encodé (qui est en fait l'utilisateur dans MEAN.IO) se présente sous la forme d'un token qui est renvoyé au client qui s'est authentifié avec succès. Dans MEAN.IO ce se passe lors de la connexion qui déclenche un appel vers l'URL */api/login* de l'API. Via un intercepteur AngularJS, la partie cliente MEAN.IO enverra ensuite à chaque requête faite au serveur ce token. Si en utilisant sa clé privée le serveur parvient à décoder le token, il s'assure de l'authenticité du client et autorise la requête.
-
-#### Menus
+Si l'authentification permet d'adpater le contenu de l'application (menus et pages) en fonction du rôle de l'utilisateur, elle sert également à protéger l'accès à l'API côté back-end. Pour ce faire elle se base sur JSON Web Token ([JWT](http://jwt.io/)), qui est une spécification pour l'authentification. Un JWT est un objet JSON que le serveur encode en utilisant une clé privée. L'objet JSON encodé (qui est en fait l'utilisateur dans MEAN.IO) se présente sous la forme d'un token renvoyé au client qui s'est authentifié avec succès. Dans MEAN.IO cela se passe lors de la connexion qui déclenche un appel vers l'URL */api/login* de l'API. Ensuite, grâce à un intercepteur AngularJS, la partie cliente MEAN.IO associera ce token à chaque requête faite au serveur. Si en utilisant sa clé privée le serveur parvient à décoder le token, il s'assure de l'authenticité du client et autorise la requête.
 
 #### Aggrégation
 
@@ -177,7 +174,7 @@ Concernant les dépendances MEAN.IO offre deux possibilités :
  
 La première approche est utilisé de façon interne par MEAN.IO pour les dépendances globales du canevas comme AngularJS ou encore jQuery. Rien ne vous empêche de faire de même pour votre application, néanmoins ceci la rendra plus monolithique dans le sens où les dépendances de vos différents modules seront stockées de façon globale. Il deviendra donc impossible d'ajouter ou de supprimer un module simplement en déplaçant son dossier. L'avantage est par contre d'avoir toutes les dépendances localisées à un seul endroit : **bower_components** pour Bower (front-end) et **node_modules** pour Node.js (back-end).
 
-La seconde approche permet à chaque module de déclarer ses dépendances et donc de rester complètement indépendant du canevas. Le chemin des fichiers JS et CSS doit être donné relativement aux dossiers **public/assets/js** et **public/assets/css*. Ceci se fait dans le fichier **app.js** du module :
+La seconde approche permet à chaque module de déclarer ses dépendances et donc de rester complètement indépendant du canevas. Le chemin des fichiers JS et CSS doit être donné relativement aux dossiers **public/assets/js** et **public/assets/css**. Ceci se fait dans le fichier **app.js** du module :
 ```javascript
 // Ajout d'une librairie externe
 Module.aggregateAsset('js','lib.js');
@@ -192,7 +189,7 @@ Module.aggregateAsset('js','first.js',{weight: -1, group: 'header'});
 // Ajout d'une librairie externe dans le footer
 Module.aggregateAsset('js','last.js',{group: 'footer'});
 ```
-Avec cette approche les dépendances d'un module sont généralement installées localement au module. Le script d'installation de MEAN.IO parcours en effet automatiquement tous les modules et exécute à l'intérieur un `npm/bower install`. NPM installera donc les dépendances indiquées dans le fichier **package.json** dans le dossier **node_modules** et il semble impossible de changer ce comportement par défaut. Néanmoins, comme NPM utilise une stratégie récursive de recherche des modules celà ne pose aucun problème particulier. La stratégie concernant Bower consiste, via un fichier **.bowerrc**, à lui faire installer les dépendances indiquées dans le fichier **bower.json** dans le dossier **public/assets/js**.
+Avec cette approche les dépendances d'un module sont généralement installées localement au module. Le script d'installation de MEAN.IO parcours en effet automatiquement tous les modules et exécute à l'intérieur un `npm/bower install`. NPM installera donc les dépendances indiquées du fichier **package.json** dans le dossier **node_modules** et il semble impossible de changer ce comportement par défaut. Néanmoins, comme NPM utilise une stratégie récursive de recherche des modules celà ne pose aucun problème particulier. La stratégie concernant Bower consiste, via un fichier **.bowerrc**, à lui faire installer les dépendances du fichier **bower.json** dans le dossier **public/assets/js**.
 ```
 {
   "directory": "public/assets/lib"
