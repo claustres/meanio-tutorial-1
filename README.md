@@ -93,6 +93,8 @@ npm update -g bower
 
 Le principal objectif de MEAN.IO est de fournir un canevas en terme d’usine logicielle et de structure de base, ainsi qu'un mécanisme d’extension, pour développer une application. Celui-ci passe par le développement d'un package ou d'un module qui est un ensemble de fonctionnalités (services back-end + composants front-end) permettant d’étendre le canevas. Comme il n'est pas forcément nécessaire pour une application donnée, il s’intègre au sein du canevas selon une règle bien définie si besoin tel un "plugin" (i.e. "greffon").
 
+### Environnements d'exécution
+
 De façon classique une application MEAN.IO peut être lancée dans différents environnements :
 
 - **development** : environnement utilisé pendant le développement
@@ -109,11 +111,21 @@ Il est aussi possible d'invoquer directement le serveur en passant l'environneme
 gulp production
 ```
 
-Les tâches par défaut exécutées par gulp suivant l'environnement sont les suivantes :
+Les tâches par défaut qui sont exécutées par gulp suivant l'environnement sont les suivantes :
 
 - **development** : exécution de [JSHint](http://jshint.com/), [CSSLint](https://github.com/CSSLint/csslint), [Less](http://lesscss.org/), [CoffeeScript](http://coffeescript.org/) sur le code et lancement du serveur en mode debug
 - **test** : exécution de [Karma](http://jshint.com/) et de [Mocha](http://mochajs.org/)
 - **production** : minification du code CSS/JS des dépendances et lancement du serveur
+
+Le format de sortie des logs côté serveur dépend également de l'environnement, [tiny](https://github.com/expressjs/morgan#tiny) en développement et [combined](https://github.com/expressjs/morgan#combined) en production :
+```
+// Environnement de développement
+GET /system/views/index.html 304 2.379 ms - -
+GET /admin/menu/main 304 8.687 ms - -
+// Environnement de production
+::1 - - [22/Mar/2015:13:13:42 +0000] "GET /modules/aggregated.js?group=header HTTP/1.1" 200 0 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
+::1 - - [22/Mar/2015:13:13:42 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
+```
 
 ### Anatomie d'une application
 
@@ -135,12 +147,13 @@ Application folder
     --- test
 ```
 
-A la racine on trouve tous les fichiers de configuration pour les outils de l'usine logicielle que sont npm, bower, gulp, jshint, karma, protractor, etc. Le répertoire **config** contient l'ensemble des fichiers de configuration, notamment *express.js* et le dossier **middlewares** pour Express et le dossier **env** pour les options propres à MEAN.IO. Les options communes à tous les environnements sont stockées dans le fichier **env/all.js**, les options propres à chaque  environnement sont stockées dans un fichier portant le nom de l'environnement dans le dossier **env**. Une liste non exhaustive des options de configuration est la suivante :
+A la racine on trouve tous les fichiers de configuration pour les outils de l'usine logicielle que sont npm, bower, gulp, jshint, karma, protractor, etc. Le répertoire **config** contient l'ensemble des fichiers de configuration, notamment *express.js* et le dossier **middlewares** (logging, etc.) pour Express et le dossier **env** pour les options propres à MEAN.IO. Les options communes à tous les environnements sont stockées dans le fichier **env/all.js**, les options propres à chaque  environnement sont stockées dans un fichier portant le nom de l'environnement dans le dossier **env**. Une liste non exhaustive des options de configuration est la suivante :
 
 - **root** : le chemin vers la racine de l'application
 - **db** : l'URL d'accès à la base de données, peut inclure un login/password de la forme *mongodb://login:passwordv@host:port/base*
 - **hostname** : le nom de l'hôte
 - **http/https.port** : le numéro de port à utiliser
+- **logging.format** : format [morgan](https://github.com/expressjs/morgan#predefined-formats) des logs serveur
 - **app.name** : le nom de l'application
 - **aggregate** : true/false pour activer/désactiver l'aggrégation
 - **secret** : clef privée pour la sécurisation via JWT (voir ci-après)
