@@ -8,7 +8,9 @@ Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introd
 
 Bien que cet article aborde l'utilisation des technologies MEAN (et d'autres comme [Mongoose](http://mongoosejs.com/) ou encore [Bootstrap](http://getbootstrap.com/)) au travers de leur utilisation dans MEAN.IO, je vous conseille en prérequis d'acquérir les bases de programmation dans ces différents framework/librairies.
 
-## Installation
+## Installation et mise à jour
+
+### Prérequis
 
 Afin de me simplifier la vie j'ai l'habitude d'utiliser des solutions pré-packagées pour l'infrastructure de développement ou de production. Pour MEAN.IO j'utilise celles de [Bitnami](https://bitnami.com/stack/mean) disponibles en environnement Windows, Linux Ubuntu ou de type Cloud comme Amazon. Elles ont l'avantage d'intégrer également Apache, un outil d'administration pour MongoDB nommé [RockMongo](https://github.com/iwind/rockmongo) et [Git](http://git-scm.com/download/) dont vous aurez besoin pour MEAN.IO. Actuellement je travaille avec Node.js v0.12.4, MongoDB v3.0.3, MEAN.IO v0.5.
 
@@ -24,6 +26,9 @@ Bien qu'il soit possible de cloner directement le dépôt GitHub de MEAN.IO, il 
 ```
 npm install -g mean-cli
 ```
+
+### Installation et configuration de MEAN.IO
+
 Il est ensuite possible d'initialiser une application dans un dossier grâce aux commandes suivantes :
 ```
 mean init folder_name
@@ -69,6 +74,20 @@ Une fois connecté une nouvelle barre de menu verticale apparait sur la gauche e
 > npm install -g rimraf
 > rimraf node_modules
 > ```
+
+### Mise à jour de MEAN.IO
+
+Au final le dossier d'une application MEAN.IO est en fait un dépôt Git, puisque la commande `mean init` utilise Git pour installer le code du canevas. Elle créé par défaut un dépôt remote (distant) nommé **upstream**. Pour se maintenir à jour avec la dernière version il suffit donc de faire :
+```
+git pull upstream master
+npm install
+```
+
+Maintenir à jour les prérequis peut parfois aider à corriger quelques bugs lors de l'installation :
+```
+npm update -g gulp
+npm update -g bower
+```
 
 ## Fonctionnement
 
@@ -155,15 +174,13 @@ A la racine on trouve comme dans le cas de l'application les fichiers de configu
 
 Pour rajouter un module au canevas il suffit de lui donner un nom unique dans l'application et de le copier dans le répertoire **packages/custom** de l'application, MEAN.IO se charge du reste !
 
-### Coeur fonctionnel
-
-#### Authentification
+### Authentification
 
 Le canevas inclus la gestion des utilisateurs et de leurs rôles. Vous disposez donc d'une page pour enregistrer un nouvel utilisateur, d'une page pour se connecter à l'application, d'une page de réinitialisation du mot de passe (nécessite toutefois de configurer un serveur SMTP) et d'une page d'index accessible de façon publique. Si vous avez le rôle administrateur ('admin') vous héritez aussi d'une IHM de gestion des utilisateurs (ajout, suppression, affectation de rôle). 
 
 Si l'authentification permet d'adpater le contenu de l'application (menus et pages) en fonction du rôle de l'utilisateur, elle sert également à protéger l'accès à l'API côté back-end. Pour ce faire elle se base sur JSON Web Token ([JWT](http://jwt.io/)), qui est une spécification pour l'authentification. Un JWT est un objet JSON que le serveur encode en utilisant une clé privée. L'objet JSON encodé (qui est en fait l'utilisateur dans MEAN.IO) se présente sous la forme d'un token renvoyé au client qui s'est authentifié avec succès. Dans MEAN.IO cela se passe lors de la connexion qui déclenche un appel vers l'URL */api/login* de l'API. Ensuite, grâce à un intercepteur AngularJS, la partie cliente MEAN.IO associera ce token à chaque requête faite au serveur. Si en utilisant sa clé privée le serveur parvient à décoder le token, il s'assure de l'authenticité du client et autorise la requête.
 
-#### Aggrégation
+### Aggrégation
 
 Afin de pouvoir rajouter un module au canevas sans devoir modifier un quelconque fichier, MEAN.IO intègre un mécanisme automatique d'aggrégation, tant pour les fichiers applicatifs que pour les dépendances. Celui-ci repose principalement sur du templating côté serveur, par défaut tous les fichiers JS du dossier **public** de chaque module sont aggrégés à l'exception du sous dossier **assets** réservé pour le stockage des librairies externes, des images et des fichiers CSS. En environnement de production les fichiers sont également minifiés.
 
@@ -210,5 +227,6 @@ Nous avons passé en revue dans cet article les grands principes de MEAN.IO. Pou
 
 > A noter que le lead développeur historique de MEAN.IO a quitté l'entreprise et créé un fork nommé [MEAN.JS](http://meanjs.org/). A ce stade il reste moins populaire malgré un départ assez fulgurant, le plus inquiétant étant le fait que les commits semblent se faire rare depuis quelques mois. De plus, MEAN.JS sépare les parties back-end et front-end contrairement à l'approche par composant de MEAN.IO, ce qui me parait moins élégant d'un point de vue structure.
 
-Dans le prochain article nous aborderons la création d'un module MEAN.IO.
+Dans les prochains articles nous aborderons la création et le fonctionnement détaillé d'un module MEAN.IO avec un cas d'utilisation concret.
+
 
