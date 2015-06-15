@@ -38,9 +38,9 @@ npm install
 
 > MEAN.IO inclut un script (voir dossier *tools/scripts*) exécuté lors de la commande d'installation qui installe les dépendances back-end et front-end de tous les modules de l'application, il est donc inutile d'exécuter le classique `bower install`
 
-De la même façon il sera possible (nous y reviendrons plus tard) d'initialiser un package (i.e. un module) de l'application dans un dossier via :
+De la même façon il sera possible (nous y reviendrons plus tard) d'initialiser un package (i.e. un module) de l'application via :
 ```
-mean package folder_name
+mean package package_name
 ```
 
 Le première chose à faire est de créer une base de données avec un utilisateur ayant les droits d'accès, pour cela utiliser le shell de MongoDB en le lançant via votre compte administrateur de la base de données (configuré à l'installation) :
