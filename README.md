@@ -225,6 +225,20 @@ Avec cette approche les dépendances d'un module sont généralement installées
 ```
 > **Trucs & Astuces** : Personnellement je préfère installer les dépendances dans le dossier **bower_components** à la racine car comme Bower n'utilise pas une stratégie récursive de recherche contrairement à NPM il est possible qu'une même dépendance utilisée par deux modules différents soit en doublon, causant par la même des problèmes à l'exécution. 
 
+## Contribuer
+
+La société qui a lancé MEAN.IO (Linnovate) a également déployé une infrastructure afin de permettre à la communauté de partager et de mettre à disposition des modules, il s'agit du [MEANetwork](https://network.mean.io). La première chose pour utiliser cette infrastructure est de s'enregistrer via l'outil en ligne de commande :
+```
+mean register
+```
+Une fois enregistré vous pouvez publier un module en vous positionnant dans le dossier du module et en exécutant la commande `publish` :
+```
+cd packages/custom/module
+mean publish
+```
+Lors de la publication d'un module, son code source sera en fait publié sur le service [GitLab](http://git.mean.io) propre au MEANetwork. Pour l'utilisateur nommé 'user' et le module nommé 'package' le dépôt associé sera accessible à l'URL http://git.mean.io/user/package. [GitLab](https://gitlab.com/) est un équivalenet Open Source du service [GitHub]
+(https://github.com/) qui peut être déployé de façon interne.
+
 ## Conclusion
 
 Nous avons passé en revue dans cet article les grands principes de MEAN.IO. Pour ma part, même s'il est évident que le framework n'est pas encore mature (la version 0.5 courante au moment de rédaction de l'article est annoncée comme la release candidate à la version 1.0), il me semble déjà procurer une bonne base pour structurer des applications web SPA full JavaScript :
