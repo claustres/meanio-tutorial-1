@@ -1,12 +1,12 @@
 # MEAN.IO (1/3)
 
-Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introduire les principaux concepts du framework et d'obtenir un environnement de développement opérationnel pour les exercices pratiques des prochains articles. Ce framework commençant à connaitre un certain "essor" (plus de 6 000 recommandations et 2 000 forks sur GitHub) je remercie Programmez! de me laisser l'occasion d'initier une des premières ressources francophone sur le sujet. 
+Ce premier article d'une série consacrée à MEAN.IO va nous permettre d'introduire les principaux concepts du framework et d'obtenir un environnement de développement opérationnel pour les exercices pratiques des prochains articles. Ce framework commençant à connaitre un certain "essor" (plus de 6 000 recommandations et 2 000 forks sur GitHub) je remercie Programmez! de me laisser l'occasion d'initier une des premières ressources francophones sur le sujet. 
 
 ## Introduction
 
 [MEAN.IO](http://mean.io/) est un framework Javascript "full-stack" permettant de créer rapidement une application web de type single-page application (SPA) avec [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), et [AngularJS](http://angularjs.org/) (MEAN). Le terme "full-stack" indique qu'il permet de gérer l'intégralité des couches de l'application en Javascript, depuis la base de données, en passant par l'API back-end jusqu'au front-end. Nous verrons que MEAN.IO est un framework au sens "cadre de travail" pour développer une application plutôt qu'au sens ensemble de librairies/composants.
 
-Bien que cet article aborde l'utilisation des technologies MEAN (et d'autres comme [Mongoose](http://mongoosejs.com/) ou encore [Bootstrap](http://getbootstrap.com/)) au travers de leur utilisation dans MEAN.IO, je vous conseille en prérequis d'acquérir les bases de programmation dans ces différents framework/librairies.
+Bien que cet article aborde l'utilisation des technologies MEAN (et d'autres comme [Mongoose](http://mongoosejs.com/) ou encore [Bootstrap](http://getbootstrap.com/)) au travers de leur utilisation dans MEAN.IO, je vous conseille en prérequis d'acquérir les bases de programmation dans ces différents frameworks/librairies.
 
 ## Installation et mise à jour
 
@@ -150,12 +150,12 @@ Application folder
 A la racine on trouve tous les fichiers de configuration pour les outils de l'usine logicielle que sont npm, bower, gulp, jshint, karma, protractor, etc. Le répertoire **config** contient l'ensemble des fichiers de configuration, notamment *express.js* et le dossier **middlewares** (logging, etc.) pour Express et le dossier **env** pour les options propres à MEAN.IO. Les options communes à tous les environnements sont stockées dans le fichier **env/all.js**, les options propres à chaque  environnement sont stockées dans un fichier portant le nom de l'environnement dans le dossier **env**. Une liste non exhaustive des options de configuration est la suivante :
 
 - **root** : le chemin vers la racine de l'application
-- **db** : l'URL d'accès à la base de données, peut inclure un login/password de la forme *mongodb://login:passwordv@host:port/base*
+- **db** : l'URL d'accès à la base de données, peut inclure un login/password de la forme *mongodb://login:password@host:port/base*
 - **hostname** : le nom de l'hôte
-- **http/https.port** : le numéro de port à utiliser
+- **http/https.port** : le numéro de port à utiliser via HTTP ou HTTPS
 - **logging.format** : format [morgan](https://github.com/expressjs/morgan#predefined-formats) des logs serveur
 - **app.name** : le nom de l'application
-- **aggregate** : true/false pour activer/désactiver l'aggrégation
+- **aggregate** : true/false pour activer/désactiver l'aggrégation (utile en mode debug)
 - **secret** : clef privée pour la sécurisation via JWT (voir ci-après)
 - informations pour se connecter via des réseaux sociaux
 
@@ -236,7 +236,7 @@ Une fois enregistré vous pouvez publier un module en vous positionnant dans le 
 cd packages/custom/module
 mean publish
 ```
-Lors de la publication d'un module, son code source sera en fait publié sur le service [GitLab](http://git.mean.io) propre au MEANetwork. Pour l'utilisateur nommé 'user' et le module nommé 'package' le dépôt associé sera accessible à l'URL http://git.mean.io/user/package. [GitLab](https://gitlab.com/) est un équivalenet Open Source du service [GitHub]
+Lors de la publication d'un module, son code source sera en fait publié sur le service [GitLab](http://git.mean.io) propre au MEANetwork. Pour l'utilisateur nommé 'user' et le module nommé 'package' le dépôt associé sera accessible à l'URL http://git.mean.io/user/package. [GitLab](https://gitlab.com/) est un équivalent Open Source du service [GitHub]
 (https://github.com/) qui peut être déployé de façon interne.
 
 ## Conclusion
