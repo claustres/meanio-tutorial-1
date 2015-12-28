@@ -114,7 +114,7 @@ gulp production
 Les tâches par défaut qui sont exécutées par gulp suivant l'environnement sont les suivantes :
 
 - **development** : exécution de [JSHint](http://jshint.com/), [CSSLint](https://github.com/CSSLint/csslint), [Less](http://lesscss.org/), [CoffeeScript](http://coffeescript.org/) sur le code et lancement du serveur en mode debug
-- **test** : exécution de [Karma](http://jshint.com/) et de [Mocha](http://mochajs.org/)
+- **test** : exécution de [Karma](http://karma-runner.github.io/) et de [Mocha](http://mochajs.org/)
 - **production** : minification du code CSS/JS des dépendances et lancement du serveur en mode production (multithread)
 
 Le format de sortie des logs côté serveur dépend également de l'environnement, [tiny](https://github.com/expressjs/morgan#tiny) en développement et [combined](https://github.com/expressjs/morgan#combined) en production :
