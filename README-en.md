@@ -49,7 +49,7 @@ mongo admin --username root root --password
 db = db.getSiblingDB ('mean-dev')
 db.createUser ({user: "mean-dev" pwd "mean-dev", Role: ["ReadWrite", "dbadmin"]})
 `` `
-You must then change the default MEAN.IO configuration to use this database and this user, open the **development.js** config file in the folder **/env** and change the value of the key ** db ** :
+You must then change the default MEAN.IO configuration to use this database and this user, open the *development.js* config file in the folder *config/env* and change the value of the key ** db ** :
 `` `javascript
 module.exports = {
   db: 'mongodb: // mean-dev: mean-dev @ localhost: 27017 / mean-dev'
