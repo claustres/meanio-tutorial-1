@@ -36,27 +36,27 @@ cd folder_name
 npm install
 `` `
 
-> MEAN.IO includes a script (see file * tools / scripts *) performed during the install command that installs the back-end and front-end dependencies of all application modules, so there is no need to run the classic `bower install`
+> MEAN.IO includes a script (see inside * tools / scripts *) ran during the `npm install` command that installs the back-end and front-end dependencies of all application modules, so there is no need to run the classic `bower install`
 
-Similarly it will be possible (we'll get to that later) to initialize a package (ie a module) application via:
+Similarly it will be possible (we'll get to that later) to initialize an application package (ie a module) via:
 `` `
 mean package package_name
 `` `
 
-The first thing to do is to create a database with a user with access rights for that use MongoDB shell by running through your administrator account database (configured at installation):
+The first thing to do is to create a database user with access rights, for that use the MongoDB shell by running through your administrator account database (configured at installation):
 `` `
 mongo admin --username root root --password
 db = db.getSiblingDB ('mean-dev')
 db.createUser ({user: "mean-dev" pwd "mean-dev", Role: ["ReadWrite", "dbadmin"]})
 `` `
-You must then change the default configuration MEAN.IO to use this base and this user, why open the development.js * * * config file in the folder / env * and change the value of the key ** db ** :
+You must then change the default MEAN.IO configuration to use this database and this user, open the **development.js** config file in the folder **/env** and change the value of the key ** db ** :
 `` `javascript
 module.exports = {
   db: 'mongodb: // mean-dev: mean-dev @ localhost: 27017 / mean-dev'
   debug: true,
   ...
 `` `
-To start the server simply run the command `gulp` then log on with your browser at [http: // localhost: 3000 /] (http: // localhost: 3000 /). You can create your first user to connect to the application through the entrance * * Join in the menu bar. At this point you should have two entries available in the menu bar in addition to the menu associated with your profile (see Figure 1). To make the user created application administrator using the following command:
+To start the server simply run the command `gulp` then open your browser at [http: // localhost: 3000 /] (http: // localhost: 3000 /). You can create your first user account to connect to the application through the *Join* entry in the menu bar. At this point you should have two entries available in the menu bar in addition to the menu associated with your profile (see Figure 1). To make the created application user an administrator use the following command:
 `` `
 email@google.com --addRole mean user admin
 `` `
