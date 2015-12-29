@@ -4,7 +4,7 @@ This first article in a series on MEAN.IO will allow us to introduce the main co
 
 ## Introduction
 
-[MEAN.IO] (http://mean.io/) is a "full-stack" Javascript framework to quickly create a single-page web application implementation type (SPA) with [MongoDB] (http: // www .mongodb.org /), [Node.js] (http://www.nodejs.org/) [Express] (http://expressjs.com/) and [angularjs] (http: // angularjs. org /) (MEAN). The term "full-stack" indicates that all layers of the application are managed in Javascript, from the database and the back-end API to the front-end side code. We will see that MEAN.IO is a "framework" in the sense of a set of rules to structure and develop an application based on the MEAN technologies rather than an entire set of libraries / components.
+[MEAN.IO] (http://mean.io/) is a "full-stack" Javascript framework to quickly create a single-page web application (SPA) with [MongoDB] (http: // www .mongodb.org /), [Node.js] (http://www.nodejs.org/) [Express] (http://expressjs.com/) and [angularjs] (http: // angularjs. org /) (MEAN). The term "full-stack" indicates that all layers of the application are managed in Javascript, from the database and the back-end API to the front-end side code. We will see that MEAN.IO is a "framework" in the sense of a set of rules to structure and develop an application based on the MEAN technologies rather than an entire set of libraries / components.
 
 Although this article discusses the use of the MEAN technologies (and others like [Mongoose] (http://mongoosejs.com/) or [Bootstrap] (http://getbootstrap.com/)) through their use in MEAN.IO, I advise you to acquire the prerequisites basics of programming in these frameworks / libraries.
 
@@ -12,17 +12,17 @@ Although this article discusses the use of the MEAN technologies (and others lik
 
 ### Prerequisites
 
-To simplify my life I used to use pre-packaged solutions for the development or production infrastructure. For MEAN.IO I use those [Bitnami] (https://bitnami.com/stack/mean) available in Windows, Linux Ubuntu or type cloud like Amazon. They also have the advantage of integrating Apache, an administration tool for MongoDB named [RockMongo] (https://github.com/iwind/rockmongo) and [Git] (http://git-scm.com/ download /) you will need to MEAN.IO. Currently I work with v0.12.4 Node.js, MongoDB v3.0.3, v0.5 MEAN.IO.
+To simplify my life I used to use pre-packaged solutions for the development or production infrastructure. For MEAN.IO I use those of [Bitnami] (https://bitnami.com/stack/mean) available for Windows, Linux Ubuntu or cloud platforms like Amazon. They also have the advantage of integrating Apache, an administration tool for MongoDB named [RockMongo] (https://github.com/iwind/rockmongo) and [Git] (http://git-scm.com/ download /) you will need for MEAN.IO. Currently I work with Node.js v0.12.4, MongoDB v3.0.3, MEAN.IO v0.5.
 
-Some dependencies MEAN.IO use [node-gyp] (https://github.com/TooTallNate/node-gyp) (such as MongoDB drivers) must therefore have prerequisites in Python Version 2.7.x and a C ++ compiler GCC as Linux or Microsoft Visual Studio C ++ under Windows.
+Some dependencies MEAN.IO use [node-gyp] (https://github.com/TooTallNate/node-gyp) (such as MongoDB drivers) therefore you must have Python Version 2.7.x and a C ++ compiler such as GCC on Linux or Microsoft Visual Studio C ++ on Windows.
 
-The tool used by MEAN.IO to perform the different tasks necessary for the development, testing and production start is [gulp] (http://gulpjs.com/). It should also install [Bower] (http://bower.io/) for dependency management front-end side of npm being used Node.js backend side. So you will proceed as follows:
+The tool used by MEAN.IO to perform the different tasks necessary for the development, testing and production is [gulp] (http://gulpjs.com/). You must also install [Bower] (http://bower.io/) for front-end side dependency management,npm being used for the backend side. So you will proceed as follows:
 `` `
 npm install -g gulp
 npm install -g bower
 `` `
 
-Although it is possible to clone the GitHub directly deposit MEAN.IO, it is advisable to go through the dedicated command-line tool named [mean-cli] (https://www.npmjs.com/package/ mean-cli) by installing it via:
+Although it is possible to clone directly the GitHub MEAN.IO repository, it is advisable to go through the dedicated command-line tool named [mean-cli] (https://www.npmjs.com/package/ mean-cli) and install it via:
 `` `
 npm install -g mean-cli
 `` `
@@ -36,7 +36,7 @@ cd folder_name
 npm install
 `` `
 
-> MEAN.IO includes a script (see file * tools / scripts *) performed during the install command that installs the back-end and front-end dependencies of all application modules, so there is no need to run the `classic bower install`
+> MEAN.IO includes a script (see file * tools / scripts *) performed during the install command that installs the back-end and front-end dependencies of all application modules, so there is no need to run the classic `bower install`
 
 Similarly it will be possible (we'll get to that later) to initialize a package (ie a module) application via:
 `` `
