@@ -17,77 +17,77 @@ To simplify my life I used to use pre-packaged solutions for the development or 
 Some dependencies MEAN.IO use [node-gyp] (https://github.com/TooTallNate/node-gyp) (such as MongoDB drivers) therefore you must have Python Version 2.7.x and a C ++ compiler such as GCC on Linux or Microsoft Visual Studio C ++ on Windows.
 
 The tool used by MEAN.IO to perform the different tasks necessary for the development, testing and production is [gulp] (http://gulpjs.com/). You must also install [Bower] (http://bower.io/) for front-end side dependency management,npm being used for the backend side. So you will proceed as follows:
-`` `
+```
 npm install -g gulp
 npm install -g bower
-`` `
+```
 
 Although it is possible to clone directly the GitHub MEAN.IO repository, it is advisable to go through the dedicated command-line tool named [mean-cli] (https://www.npmjs.com/package/ mean-cli) and install it via:
-`` `
+```
 npm install -g mean-cli
-`` `
+```
 
 ### Installing and Configuring MEAN.IO
 
 It is then possible to initialize an application in a folder with the following commands:
-`` `
+```
 init mean folder_name
 cd folder_name
 npm install
-`` `
+```
 
 > MEAN.IO includes a script (see inside * tools / scripts *) ran during the `npm install` command that installs the back-end and front-end dependencies of all application modules, so there is no need to run the classic `bower install`
 
 Similarly it will be possible (we'll get to that later) to initialize an application package (ie a module) via:
-`` `
+```
 mean package package_name
-`` `
+```
 
 The first thing to do is to create a database user with access rights, for that use the MongoDB shell by running through your administrator account database (configured at installation):
-`` `
+```
 mongo admin --username root root --password
 db = db.getSiblingDB ('mean-dev')
 db.createUser ({user: "mean-dev" pwd "mean-dev", Role: ["ReadWrite", "dbadmin"]})
-`` `
+```
 You must then change the default MEAN.IO configuration to use this database and this user, open the *development.js* config file in the folder *config/env* and change the value of the key ** db ** :
-`` `javascript
+```javascript
 module.exports = {
   db: 'mongodb: // mean-dev: mean-dev @ localhost: 27017 / mean-dev'
   debug: true,
   ...
-`` `
+```
 To start the server simply run the command `gulp` then open your browser at [http: // localhost: 3000 /] (http: // localhost: 3000 /). You can create your first user account to connect to the application through the *Join* entry in the menu bar. At this point you should have two entries available in the menu bar in addition to the menu associated with your profile (see Figure 1). To make the created application user an administrator use the following command:
-`` `
-email@google.com --addRole mean user admin
-`` `
+```
+mean user email@google.com --addRole admin
+```
 Once connected a new sidebar appears on the left and contains the different configuration options available in administrator mode.
 
 ! [Figure 1] (Figure1.png "Figure 1: Home application MEAN.IO default once logged in (non-administrator mode the vertical menu on the left is not apparent)")
 
 > ** Tips & Tricks **: run the following command in the root folder of the application to get all the information about MEAN.IO version (useful for example when submitting bugs to the tracker)
-> `` `
+> ```
 > Mean status
-> `` `
+> ```
 
 > ** Tips & Tricks **: Windows sometimes nesting node modules poses problems too long ways and it becomes possible to erase the node_modules * * folder, for that I use the tool [rimraf] ( https://github.com/isaacs/rimraf):
-> `` `
+> ```
 > -g Npm install rimraf
 > Rimraf node_modules
-> `` `
+> ```
 
 ### Update MEAN.IO
 
 Finally the back of a MEAN.IO application is actually a Git repository, since the `mean init` command uses Git to install the template code. She created a default remote repository (remote) named ** ** upstream. To stay updated with the latest version so just do:
-`` `
+```
 git pull upstream master
 npm install
-`` `
+```
 
 Maintain prerequisites can sometimes help fix some bugs during the installation:
-`` `
+```
 npm update -g gulp
 npm update -g bower
-`` `
+```
 
 ## Operation
 
@@ -102,14 +102,14 @@ Conventionally MEAN.IO an application can be launched in different environments:
 - Production ** ** used in the production environment
 
 To set the environment it is possible to go through the environment variable ** ** NODE_ENV before starting the server:
-`` `
+```
 set NODE_ENV = Production
 gulp
-`` `
+```
 It is also possible to directly invoke the server through the environment setting:
-`` `
+```
 gulp Production
-`` `
+```
 
 The default tasks are performed by gulp after the environment are:
 
@@ -118,19 +118,19 @@ The default tasks are performed by gulp after the environment are:
 - ** ** Production: minification of CSS / JS dependencies and launch the server in production mode (multithreaded)
 
 The server side logs output format is also dependent on the environment, [tiny] (https://github.com/expressjs/morgan#tiny) developing and [combined] (https://github.com/expressjs/ # morgan combined) in production:
-`` `
+```
 // Development environment
 GET /system/views/index.html 2379 304 ms - -
 GET / admin / menu / main ms 304 8687 - -
 // Production Environment
 :: 1 - - [22 / Mar / 2015: 13: 13: 42 +0000] "GET /modules/aggregated.js?group=header HTTP / 1.1" 200 0 "http: // localhost: 3000 /" "Mozilla /5.0 (Macintosh, Mac OS X Intel 10_10_2) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / Safari 41.0.2272.101 / 537.36 "
 :: 1 - - [22 / Mar / 2015: 13: 13: 42 +0000] "GET / HTTP / 1.1" 200 - "-" "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit / 537.36 (KHTML , like Gecko) Chrome / Safari 41.0.2272.101 / 537.36 "
-`` `
+```
 
 ### Anatomy of an application
 
 Once initialized the back of a MEAN.IO app has the following structure:
-`` `
+```
 Application folder
 --- Bower_components contains the dependencies Bower (front-end)
 --- Config: configuration files (Express, database, etc.)
@@ -145,7 +145,7 @@ Application folder
 --- Tools:
     --- Scripts
     --- test
-`` `
+```
 
 At the root is found all the configuration files for the software tools that are factory npm, bower, gulp, jshint, karma, protractor, etc. ** ** The config directory contains all configuration files, including * * express.js and middleware ** ** folder (logging, etc.) Express and folder ** ** for approx own options to MEAN.IO. Options common to all environments are stored in the file ** env / ** all.js the environment-specific options are stored in a file with the name of the environment in the folder ** ** approx. A non-exhaustive list of configuration options is as follows:
 
@@ -162,7 +162,7 @@ At the root is found all the configuration files for the software tools that are
 ### Anatomy of a module
 
 The file of a package or MEAN.IO module has the following structure:
-`` `
+```
 Module folder
 --- Docs: contains the API documentation (back-end)
 --- Public: public part of the module on the site
@@ -179,7 +179,7 @@ Module folder
     --- Test: back-end tests (Jasmine)
     --- Views: views HMTL (templating Swig)
 --- Node_modules: contains Node.js module dependencies (back-end)
-`` `
+```
 
 At the root is found as in the case of applying the configuration files to NPM, and bower MEAN.IO (** mean.json **). The most important is the file app.js ** ** which is the module entry point. All files inside the folder Public ** ** will be publicly accessible at the URL * / module-name / file-relative-path *. For example, to access a angularjs controller named 'controller' in the module named 'module' is the URL module * / controllers / controller.js *.
 
@@ -203,39 +203,39 @@ Regarding MEAN.IO outbuildings offers two options:
 The first approach is used internally by MEAN.IO for global dependencies canvas as angularjs or jQuery. Nothing prevents you from doing the same for your application, however, this will make it more monolithic in the sense that the dependencies of your modules will be stored globally. It will become impossible to add or remove a module by simply moving his record. The advantage is to have against all dependencies localized in one place: ** ** bower_components for Bower (front-end) and ** ** node_modules for Node.js (back-end).
 
 The second approach allows each module to declare its dependencies and thus to remain completely independent of the canvas. The path of JS and CSS files must be given in the records ** public / assets / js ** and ** public / assets / css **. This is done in the file ** ** app.js the module:
-`` `javascript
+```javascript
 // Adding an external library
 Module.aggregateAsset ('js', 'lib.js');
 
 // Add the module CSS file
 Module.aggregateAsset ('css', 'module.css');
-`` `
+```
 It is possible to control the aggregation more finely if necessary
-`` `javascript
+```javascript
 // Adding an external library in the header and before the following (default weight is 0)
 Module.aggregateAsset ('js', 'first.js', {weight: -1, group 'header'});
 // Adding an external library in the footer
 Module.aggregateAsset ('js', 'last.js', {group: 'footer'});
-`` `
+```
 With this approach the dependencies of a module are usually locally installed module. The installation script MEAN.IO effect automatically route all modules and runs inside a `npm / install` bower. NPM then install the dependencies of the file indicated package.json ** ** in the ** file ** node_modules and it seems impossible to change this default behavior. Nevertheless, as NPM modules uses a recursive search strategy this poses no particular problem. The strategy Bower is via a file **. ** Bowerrc, to submit install dependencies bower.json ** ** ** file in the public folder / assets / js **.
-`` `
+```
 {
   "directory": "public / assets / lib"
 }
-`` `
+```
 > ** Tips & Tricks **: Personally I prefer to install the dependencies in the bower_components ** ** to the root folder because as Bower does not use a recursive search strategy unlike NPM it is possible that even used dependence by two different modules is duplicated, causing the same problems at runtime.
 
 ## To contribute
 
 The company that launched MEAN.IO (Linnovate) also deployed an infrastructure to allow the community to share and make available modules, it is the [MEANetwork] (https://network.mean.io ). The first thing is to use this infrastructure to register using the command line tool:
-`` `
+```
 mean register
-`` `
+```
 Once registered you can post a module by positioning yourself in the folder of the module and running the `publish` command:
-`` `
+```
 cd packages / custom / Module
 Publish mean
-`` `
+```
 When posting a module, its source code will actually be released on the service [GitLab] (http://git.mean.io) specific to MEANetwork. For the user named 'user' and module named 'package' the associated deposit will be accessible at the URL http://git.mean.io/user/package. [GitLab] (https://gitlab.com/) is an Open Source equivalent service [GitHub]
 (https://github.com/) which can be deployed internally.
 
