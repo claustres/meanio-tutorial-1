@@ -1,12 +1,12 @@
 # MEAN.IO (1/3)
 
-This first article in a series on MEAN.IO will allow us to introduce the main concepts of the framework and get a functioning development environment for practical exercises for future articles. This framework starting to know a "boom" (over 6000 and 2000 recommendations forks on GitHub) Thank Program! allow me the opportunity to introduce one of the first French-language resources on the subject.
+This first article in a series on MEAN.IO will allow us to introduce the main concepts of the framework and get a functioning development environment for practical exercises in future articles. This framework starting to know a "boom" (over 6000 recommendations and 2000 forks on GitHub).
 
 ## Introduction
 
-[MEAN.IO] (http://mean.io/) is a Javascript framework "full-stack" to quickly create a single-page web application implementation type (SPA) with [MongoDB] (http: // www .mongodb.org /), [Node.js] (http://www.nodejs.org/) [Express] (http://expressjs.com/) and [angularjs] (http: // angularjs. org /) (MEAN). The term "full-stack" indicates that helps manage all layers of the application in Javascript, since the database, via the back-end to front-end API. We will see that MEAN.IO is a framework under "framework" to develop an application rather than the entire direction of libraries / components.
+[MEAN.IO] (http://mean.io/) is a "full-stack" Javascript framework to quickly create a single-page web application implementation type (SPA) with [MongoDB] (http: // www .mongodb.org /), [Node.js] (http://www.nodejs.org/) [Express] (http://expressjs.com/) and [angularjs] (http: // angularjs. org /) (MEAN). The term "full-stack" indicates that all layers of the application are managed in Javascript, from the database and the back-end API to the front-end side code. We will see that MEAN.IO is a "framework" in the sense of a set of rules to structure and develop an application based on the MEAN technologies rather than an entire set of libraries / components.
 
-Although this article discusses the use of technologies MEAN (and others like [Mongoose] (http://mongoosejs.com/) or [Bootstrap] (http://getbootstrap.com/)) through their use in MEAN.IO, I advise you to acquire the prerequisites basics of programming in these frameworks / libraries.
+Although this article discusses the use of the MEAN technologies (and others like [Mongoose] (http://mongoosejs.com/) or [Bootstrap] (http://getbootstrap.com/)) through their use in MEAN.IO, I advise you to acquire the prerequisites basics of programming in these frameworks / libraries.
 
 ## Installation and Update
 
